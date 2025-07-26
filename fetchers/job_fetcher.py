@@ -1,26 +1,10 @@
 import requests
 import datetime
 import time
-from config import COOKIES
+from configs.config import COOKIES, HEADERS
 def fetch_jobs_within_24_hours():
     cookies = COOKIES
-    headers = {
-        'accept': 'application/json, text/plain, */*',
-        'accept-language': 'zh-CN,zh;q=0.9,en-US;q=0.8,en;q=0.7',
-        'content-type': 'application/x-www-form-urlencoded',
-        'origin': 'https://www.nowcoder.com',
-        'priority': 'u=1, i',
-        'referer': 'https://www.nowcoder.com/jobs/school/schedule',
-        'sec-ch-ua': '"Not)A;Brand";v="8", "Chromium";v="138", "Google Chrome";v="138"',
-        'sec-ch-ua-mobile': '?1',
-        'sec-ch-ua-platform': '"Android"',
-        'sec-fetch-dest': 'empty',
-        'sec-fetch-mode': 'cors',
-        'sec-fetch-site': 'same-origin',
-        'user-agent': 'Mozilla/5.0 (Linux; Android 6.0; Nexus 5 Build/MRA58N) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/138.0.0.0 Mobile Safari/537.36',
-        'x-requested-with': 'XMLHttpRequest',
-    }
-
+    headers = HEADERS
     params = {
         '_': str(int(time.time() * 1000)),
     }

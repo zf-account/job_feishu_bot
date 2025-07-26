@@ -5,7 +5,7 @@
 1. 爬取[牛客网](https://www.nowcoder.com)每天更新的校招职位
 2. 使用webhook创建飞书机器人，将24h内更新的职位推送到飞书群中
 3. 每日定时运行项目，实现定时推送
-
+PS: 本项目爬取信息只为交流学习，fork项目使用请遵守相关法律规定
 
 # 二、使用教程
 
@@ -15,9 +15,21 @@
 pip install -r requirements.txt      
 ```
 
-## 2.2 替换参数
-- 在config.py文件中，将`WEBHOOK_URL`替换为自己的飞书机器人链接，将`COOKIES`替换为自己访问牛客网的cookies
+## 2.2 设置参数
+- 在configs文件夹下，创建文件`config.py`，config.py包含以下内容
+```python
+JOB_SENDER_WEBHOOK_URL = "your_job_sender_webhook_url"
+
+COOKIES = {"your_cookies"}
+
+HEADERS = {"your_headers"}
+```
+
 - 关于飞书机器人的创建，参考API文档[自定义机器人使用指南](https://open.feishu.cn/document/client-docs/bot-v3/add-custom-bot?lang=zh-CN#5a997364)
+- 关于`cookies`和`headers`的获取
+    - 使用`Chrome`访问牛客网，找到校招日程
+    - 使用`F12`快捷键唤出开发者工具
+    - 在`Network`界面找到`list_card`，在`Headers`下即可找到
 
 ## 2.3 执行
 ```sh
