@@ -1,0 +1,48 @@
+JOB_SENDER_WEBHOOK_URL = "https://open.feishu.cn/open-apis/bot/v2/hook/xxxxxx"
+
+COOKIES = {
+            'NOWCODERCLINETID': 'xxxxxx',
+            'gr_user_id': 'xxxxxx',
+            'c196c3667d214851b11233f5c17f99d5_gr_last_sent_cs1': 'xxxxxx',
+            '_clck': 'xxxxxx',
+            'username': 'xxxxxx',
+            'username.sig': 'xxxxxx',
+            'uid': 'xxxxxx',
+            'uid.sig': 'xxxxxx',
+            'NOWCODERUID': 'xxxxxx',
+            '__snaker__id': 'xxxxxx',
+            'gdxidpyhxdE': 'xxxxxx',
+            'isAgreementChecked': 'true',
+            't': 'xxxxxx',
+            'csrfToken': 'xxxxxx',
+            'Hm_lvt_a808a1326b6c06c437de769d1b85b870': 'xxxxxx',
+            'HMACCOUNT': 'xxxxxx',
+            'fromPut': 'xxxxxx',
+            'displayStyle': 'h5',
+            'c196c3667d214851b11233f5c17f99d5_gr_session_id': 'xxxxxx',
+            'c196c3667d214851b11233f5c17f99d5_gr_last_sent_sid_with_cs1': 'xxxxxx',
+            'c196c3667d214851b11233f5c17f99d5_gr_session_id_432c27f3-2616-4dba-b30a-b2f715a891fe': 'true',
+            'acw_tc': 'xxxxxx',
+            'SERVERID': 'xxxxxx',
+            'SERVERCORSID': 'xxxxxx',
+            'Hm_lpvt_a808a1326b6c06c437de769d1b85b870': 'xxxxxx',
+            'c196c3667d214851b11233f5c17f99d5_gr_cs1': 'xxxxxx',
+        }
+
+HEADERS = {
+    'accept': 'application/json, text/plain, */*',
+    'accept-language': 'zh-CN,zh;q=0.9,en-US;q=0.8,en;q=0.7',
+    'content-type': 'application/x-www-form-urlencoded',
+    'origin': 'https://www.nowcoder.com',
+    'priority': 'u=1, i',
+    'referer': 'https://www.nowcoder.com/jobs/school/schedule',
+    'sec-ch-ua': '"Not)A;Brand";v="8", "Chromium";v="138", "Google Chrome";v="138"',
+    'sec-ch-ua-mobile': '?1',
+    'sec-ch-ua-platform': '"Android"',
+    'sec-fetch-dest': 'empty',
+    'sec-fetch-mode': 'cors',
+    'sec-fetch-site': 'same-origin',
+    'user-agent': 'Mozilla/5.0 (Linux; Android 6.0; Nexus 5 Build/MRA58N) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/138.0.0.0 Mobile Safari/537.36',
+    'x-requested-with': 'XMLHttpRequest',
+}
+
