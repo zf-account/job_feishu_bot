@@ -1,0 +1,43 @@
+# 一、项目介绍
+
+项目应用场景为每天在飞书群中关注24h内更新的校招职位，辅助及时关注新开放的校招职位，提高投递效率。
+项目主要实现以下功能：
+1. 爬取[牛客网](https://www.nowcoder.com)每天更新的校招职位
+2. 使用webhook创建飞书机器人，将24h内更新的职位推送到飞书群中
+3. 每日定时运行项目，实现定时推送
+
+
+# 二、使用教程
+
+## 2.1 Install
+
+```sh
+pip install -r requirements.txt      
+```
+
+## 2.2 替换参数
+- 在config.py文件中，将`WEBHOOK_URL`替换为自己的飞书机器人链接，将`COOKIES`替换为自己访问牛客网的cookies
+- 关于飞书机器人的创建，参考API文档[自定义机器人使用指南](https://open.feishu.cn/document/client-docs/bot-v3/add-custom-bot?lang=zh-CN#5a997364)
+
+## 2.3 执行
+```sh
+python daily_job_notifier.py  
+```
+
+命令执行完成后，在飞书群中可以看到如下信息：
+![](https://aitotra-picture01-1323869857.cos.ap-beijing.myqcloud.com/typora_img/%E6%88%AA%E5%B1%8F2025-07-26%2019.34.30.png)
+
+
+# 三、周期调用
+使用 Linux crontab（Linux or MacOS）
+1. 编辑 crontab：
+
+```sh
+crontab -e
+```
+
+2. 添加以下内容（每天上午 10 点定时执行）：
+```sh
+0 10 * * * /usr/bin/python3 /your/path/daily_job_notifier.py >> /tmp/job_notifier.log 2>&1
+```
+- 将 /usr/bin/python3 和 /your/path/to/... 替换为你实际的 Python 路径和脚本路径
