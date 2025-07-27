@@ -1,9 +1,20 @@
 import requests
+import csv
+from datetime import datetime
 
 def send_to_feishu(jobs, webhook_url):
     nums = 1
+    # 新增：写入CSV
+    if jobs:
+        filename = f"jobs_data/jobs_{datetime.now().strftime('%Y%m%d_%H%M%S')}.csv"
+        fieldnames = list(jobs[0].keys())
+        with open(filename, 'w', newline='', encoding='utf-8') as csvfile:
+            writer = csv.DictWriter(csvfile, fieldnames=fieldnames)
+            writer.writeheader()
+            writer.writerows(jobs)
+
     if not jobs:
-        content = "过去24小时内没有新职位更新。"
+        content = "**过去24小时内没有新职位更新**"
     else:
         content = "**过去24小时内更新的职位如下：**\n\n"
         for job in jobs:

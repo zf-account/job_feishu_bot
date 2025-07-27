@@ -1,4 +1,5 @@
 JOB_SENDER_WEBHOOK_URL = "https://open.feishu.cn/open-apis/bot/v2/hook/xxxxxx"
+DEADLINE_REMIND_WEBHOOK_URL = "https://open.feishu.cn/open-apis/bot/v2/hook/xxxxxx"
 
 COOKIES = {
             'NOWCODERCLINETID': 'xxxxxx',

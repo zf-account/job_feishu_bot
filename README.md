@@ -1,6 +1,7 @@
 # 一、项目介绍
 
-项目应用场景为每天在飞书群中关注24h内更新的校招职位，辅助及时关注新开放的校招职位，提高投递效率。
+项目应用场景为每天在飞书群中关注24h内更新的校招职位，辅助及时关注新开放的校招职位，提高投递效率。同时，在飞书群中推送未来24h内截止投递的公司，提醒及时投递。
+
 项目主要实现以下功能：
 1. 爬取[牛客网](https://www.nowcoder.com)每天更新的校招职位
 2. 使用webhook创建飞书机器人，将24h内更新的职位推送到飞书群中
@@ -20,6 +21,8 @@ pip install -r requirements.txt
 ```python
 JOB_SENDER_WEBHOOK_URL = "your_job_sender_webhook_url"
 
+DEADLINE_REMIND_WEBHOOK_URL = "your_deadline_remind_webhook_url"
+
 COOKIES = {"your_cookies"}
 
 HEADERS = {"your_headers"}
@@ -37,8 +40,12 @@ python daily_job_notifier.py
 ```
 
 命令执行完成后，在飞书群中可以看到如下信息：
+
+- 24h内更新的职位推送
 ![](https://aitotra-picture01-1323869857.cos.ap-beijing.myqcloud.com/typora_img/%E6%88%AA%E5%B1%8F2025-07-26%2019.34.30.png)
 
+- 未来24h截止投递的公司推送
+![](https://aitotra-picture01-1323869857.cos.ap-beijing.myqcloud.com/typora_img/%E6%88%AA%E5%B1%8F2025-07-28%2000.54.21.png)
 
 # 三、周期调用
 使用 Linux crontab（Linux or MacOS）
