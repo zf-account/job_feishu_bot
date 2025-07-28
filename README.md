@@ -17,16 +17,7 @@ pip install -r requirements.txt
 ```
 
 ## 2.2 设置参数
-- 在configs文件夹下，创建文件`config.py`，config.py包含以下内容
-```python
-JOB_SENDER_WEBHOOK_URL = "your_job_sender_webhook_url"
-
-DEADLINE_REMIND_WEBHOOK_URL = "your_deadline_remind_webhook_url"
-
-COOKIES = {"your_cookies"}
-
-HEADERS = {"your_headers"}
-```
+- 在configs文件夹下，创建文件`config.py`，`config.py`文件中需要包含的内容参考`config_sample.py`
 
 - 关于飞书机器人的创建，参考API文档[自定义机器人使用指南](https://open.feishu.cn/document/client-docs/bot-v3/add-custom-bot?lang=zh-CN#5a997364)
 - 关于`cookies`和`headers`的获取

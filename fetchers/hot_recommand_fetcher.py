@@ -2,24 +2,26 @@ import requests
 import csv
 from datetime import datetime
 import time
-from configs.config import COOKIES, HEADERS
-def fetch_jobs_within_24_hours():
-    cookies = COOKIES
-    headers = HEADERS
+from configs.config import HOT_RECOMMAND_COOKIES, HOT_RECOMMAND_HEADERS
+def fetch_jobs_with_hot_recommand():
+    cookies = HOT_RECOMMAND_COOKIES
+    headers = HOT_RECOMMAND_HEADERS
+
     params = {
         '_': str(int(time.time() * 1000)),
     }
 
     data = {
-        'query': '',
-        'propertyId': '',
-        'page': '1',
-        'pageSize': '20',
-        'tab': '3',
+    'cities': '',
+    'industryIds': '',
+    'query': '',
+    'tab': '1',
+    'propertyId': '',
+    'batchId': '',
+    'page': '1',
+    'pageSize': '20',
     }
 
-    now = int(time.time())
-    yesterday = now - 86400
     jobs = []
 
     response = requests.post(
@@ -33,27 +35,29 @@ def fetch_jobs_within_24_hours():
     print("状态码:", response.status_code)
     result = response.json()
     recruit_list = result.get('data').get('datas')
+    now = int(time.time())
     for job in recruit_list:
-        update_time = int(job.get("wangshenUpdateTime", 0)) // 1000
-        if update_time >= yesterday:
+        wangshenEndDate = int(job.get("wangshenEndDate", 0)) // 1000
+        if wangshenEndDate >= now:
             jobs.append({
                 "公司": job.get("name"),
                 "批次": job.get("batchName"),
-                "更新时间": datetime.fromtimestamp(update_time).strftime("%Y-%m-%d %H:%M"),
+                "更新时间": datetime.fromtimestamp(int(job.get("wangshenUpdateTime", 0)) // 1000).strftime("%Y-%m-%d %H:%M"),
                 "网申开始时间": datetime.fromtimestamp(job.get("wangshenBeginDate") / 1000).strftime("%Y-%m-%d %H:%M"),
                 "网申结束时间": datetime.fromtimestamp(job.get("wangshenEndDate") / 1000).strftime("%Y-%m-%d %H:%M")
             })
 
     if jobs:
-        filename = f"jobs_data/jobs_24h_update_{datetime.now().strftime('%Y%m%d_%H%M%S')}.csv"
+        filename = f"jobs_data/jobs_hot_recommand_{datetime.now().strftime('%Y%m%d_%H%M%S')}.csv"
         fieldnames = list(jobs[0].keys())
         with open(filename, 'w', newline='', encoding='utf-8') as csvfile:
             writer = csv.DictWriter(csvfile, fieldnames=fieldnames)
             writer.writeheader()
             writer.writerows(jobs)
+
     return jobs
 
 if __name__ == "__main__":
-    jobs = fetch_jobs_within_24_hours()
+    jobs = fetch_jobs_with_hot_recommand()
     for job in jobs:
         print(job)

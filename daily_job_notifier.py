@@ -7,7 +7,5 @@ from senders.apply_deadline_remind_sender import deadline_remind_sender
 if __name__ == "__main__":
     jobs = fetch_jobs_within_24_hours()
     path = "jobs_data"
-    if jobs:
-        print(f"jobs is not null")
     send_to_feishu(jobs, JOB_SENDER_WEBHOOK_URL)
     deadline_remind_sender(path, DEADLINE_REMIND_WEBHOOK_URL)
