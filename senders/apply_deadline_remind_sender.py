@@ -2,7 +2,7 @@ import requests
 import os
 import csv
 from datetime import datetime, timedelta
-from fetchers.hot_recommand_fetcher import fetch_jobs_with_hot_recommand
+from fetchers.hot_recommend_fetcher import fetch_jobs_with_hot_recommend
 
 def get_jobs_ending_in_24h(path='jobs_data'):
     jobs = []
@@ -35,8 +35,8 @@ def deadline_remind_sender(path, webhook_url):
     jobs = get_jobs_ending_in_24h(path)
     if not jobs:
         content = "**未来24小时内没有公司截止投递**\n\n**下面推送热门推荐公司**\n\n"
-        hot_recommand_jobs = fetch_jobs_with_hot_recommand()
-        for job in hot_recommand_jobs:
+        hot_recommend_jobs = fetch_jobs_with_hot_recommend()
+        for job in hot_recommend_jobs:
             content += f"- [{nums} : {job['公司']} - {job['批次']}] \n    更新时间：{job['更新时间']} \n    网申开始时间：{job['网申开始时间']} \n    网申结束时间：{job['网申结束时间']}\n"
             nums += 1
     else:

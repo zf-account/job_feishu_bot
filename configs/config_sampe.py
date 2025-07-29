@@ -1,7 +1,7 @@
 JOB_SENDER_WEBHOOK_URL = "https://open.feishu.cn/open-apis/bot/v2/hook/xxxxxx"
 DEADLINE_REMIND_WEBHOOK_URL = "https://open.feishu.cn/open-apis/bot/v2/hook/xxxxxx"
 
-HOT_RECOMMAND_COOKIES = {
+HOT_RECOMMEND_COOKIES = {
             'NOWCODERCLINETID': 'xxxxxx',
             'gr_user_id': 'xxxxxx',
             'c196c3667d214851b11233f5c17f99d5_gr_last_sent_cs1': 'xxxxxx',
@@ -30,7 +30,7 @@ HOT_RECOMMAND_COOKIES = {
             'c196c3667d214851b11233f5c17f99d5_gr_cs1': 'xxxxxx',
         }
 
-HOT_RECOMMAND_HEADERS = {
+HOT_RECOMMEND_HEADERS = {
     'accept': 'application/json, text/plain, */*',
     'accept-language': 'zh-CN,zh;q=0.9,en-US;q=0.8,en;q=0.7',
     'content-type': 'application/x-www-form-urlencoded',

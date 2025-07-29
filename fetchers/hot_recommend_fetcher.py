@@ -2,10 +2,10 @@ import requests
 import csv
 from datetime import datetime
 import time
-from configs.config import HOT_RECOMMAND_COOKIES, HOT_RECOMMAND_HEADERS
-def fetch_jobs_with_hot_recommand():
-    cookies = HOT_RECOMMAND_COOKIES
-    headers = HOT_RECOMMAND_HEADERS
+from configs.config import HOT_RECOMMEND_COOKIES, HOT_RECOMMEND_HEADERS
+def fetch_jobs_with_hot_recommend():
+    cookies = HOT_RECOMMEND_COOKIES
+    headers = HOT_RECOMMEND_HEADERS
 
     params = {
         '_': str(int(time.time() * 1000)),
@@ -48,7 +48,7 @@ def fetch_jobs_with_hot_recommand():
             })
 
     if jobs:
-        filename = f"jobs_data/jobs_hot_recommand_{datetime.now().strftime('%Y%m%d_%H%M%S')}.csv"
+        filename = f"jobs_data/jobs_hot_recommend_{datetime.now().strftime('%Y%m%d_%H%M%S')}.csv"
         fieldnames = list(jobs[0].keys())
         with open(filename, 'w', newline='', encoding='utf-8') as csvfile:
             writer = csv.DictWriter(csvfile, fieldnames=fieldnames)
@@ -58,6 +58,6 @@ def fetch_jobs_with_hot_recommand():
     return jobs
 
 if __name__ == "__main__":
-    jobs = fetch_jobs_with_hot_recommand()
+    jobs = fetch_jobs_with_hot_recommend()
     for job in jobs:
         print(job)
