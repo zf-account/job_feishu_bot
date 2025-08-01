@@ -45,7 +45,7 @@ def fetch_jobs_within_24_hours():
             })
 
     if jobs:
-        filename = f"jobs_data/jobs_24h_update_{datetime.now().strftime('%Y%m%d_%H%M%S')}.csv"
+        filename = f"/home/aitotra/vscodeworkspace/job_feishu_bot/jobs_data/jobs_24h_update_{datetime.now().strftime('%Y%m%d_%H%M%S')}.csv"
         fieldnames = list(jobs[0].keys())
         with open(filename, 'w', newline='', encoding='utf-8') as csvfile:
             writer = csv.DictWriter(csvfile, fieldnames=fieldnames)

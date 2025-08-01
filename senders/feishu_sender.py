@@ -23,4 +23,5 @@ def send_to_feishu(jobs, webhook_url):
             }
         }
     }
-    requests.post(webhook_url, json=data)
+    resp = requests.post(webhook_url, json=data)
+    print(f"send_to_feishu status: {resp.status_code}, response: {resp.text}")

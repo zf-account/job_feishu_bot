@@ -1,0 +1,8 @@
+configs/config.py
+configs/__pycache__
+daily_logs
+fetchers/__pycache__
+jobs_data
+senders/__pycache__
+test.py
+daily_run.sh

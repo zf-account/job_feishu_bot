@@ -32,18 +32,21 @@ def get_jobs_ending_in_24h(path='jobs_data'):
 
 def deadline_remind_sender(path, webhook_url):
     nums = 1
+    hot_recommend_jobs = fetch_jobs_with_hot_recommend()
+    for job in hot_recommend_jobs:
+        hot_job_content += f"- [{nums} : {job['公司']} - {job['批次']}] \n    更新时间：{job['更新时间']} \n    网申开始时间：{job['网申开始时间']} \n    网申结束时间：{job['网申结束时间']}\n"
+        nums += 1
+
     jobs = get_jobs_ending_in_24h(path)
     if not jobs:
         content = "**未来24小时内没有公司截止投递**\n\n**下面推送热门推荐公司**\n\n"
-        hot_recommend_jobs = fetch_jobs_with_hot_recommend()
-        for job in hot_recommend_jobs:
-            content += f"- [{nums} : {job['公司']} - {job['批次']}] \n    更新时间：{job['更新时间']} \n    网申开始时间：{job['网申开始时间']} \n    网申结束时间：{job['网申结束时间']}\n"
-            nums += 1
+        content += hot_job_content
     else:
         content = "**未来24小时内截止投递的公司如下：**\n\n"
         for job in jobs:
             content += f"- [{nums} : {job['公司']} - {job['批次']}] \n    更新时间：{job['更新时间']} \n    网申开始时间：{job['网申开始时间']} \n    网申结束时间：{job['网申结束时间']}\n"
             nums += 1
+        content += f"\n\n**下面推送热门推荐公司**\n\n{hot_job_content}"
 
     data = {
         "msg_type": "post",
@@ -58,7 +61,8 @@ def deadline_remind_sender(path, webhook_url):
             }
         }
     }
-    requests.post(webhook_url, json=data)
+    resp = requests.post(webhook_url, json=data)
+    print(f"deadline_remind_sender status: {resp.status_code}, response: {resp.text}")
 
 
 if __name__ == "__main__":
