@@ -3,6 +3,7 @@ import os
 import csv
 from datetime import datetime, timedelta
 from fetchers.hot_recommend_fetcher import fetch_jobs_with_hot_recommend
+from tools import send_with_retry
 
 def get_jobs_ending_in_24h(path='jobs_data'):
     jobs = []
@@ -62,8 +63,9 @@ def deadline_remind_sender(path, webhook_url):
             }
         }
     }
-    resp = requests.post(webhook_url, json=data)
-    print(f"deadline_remind_sender status: {resp.status_code}, response: {resp.text}")
+    resp = send_with_retry(lambda: requests.post(webhook_url, json=data))
+    if resp is None:
+        logging.error("deadline_remind_sender failed after retries")
 
 
 if __name__ == "__main__":

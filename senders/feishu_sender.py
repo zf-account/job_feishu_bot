@@ -1,5 +1,5 @@
 import requests
-
+from tools import send_with_retry
 def send_to_feishu(jobs, webhook_url):
     nums = 1
     if not jobs:
@@ -23,5 +23,6 @@ def send_to_feishu(jobs, webhook_url):
             }
         }
     }
-    resp = requests.post(webhook_url, json=data)
-    print(f"send_to_feishu status: {resp.status_code}, response: {resp.text}")
+    resp = send_with_retry(lambda: requests.post(webhook_url, json=data))
+    if resp is None:
+        logging.error("send_to_feishu failed after retries")
