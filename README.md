@@ -24,7 +24,26 @@ pip install -r requirements.txt
     - 使用`Chrome`访问牛客网，找到校招日程
     - 使用`F12`快捷键唤出开发者工具
     - 在`Network`界面找到`list_card`，在`Headers`下即可找到
-
+- 添加相关目录，添加完成后这个项目结构如下所示：
+```test
+├── configs
+│   ├── config.py
+│   └── config_sampe.py
+├── daily_job_notifier.py
+├── daily_logs
+├── daily_run.sh
+├── fetchers
+│   ├── hot_recommend_fetcher.py
+│   └── job_fetcher.py
+├── jobs_data
+├── README.md
+├── requirements.txt
+├── senders
+│   ├── apply_deadline_remind_sender.py
+│   ├── feishu_sender.py
+│   └── tools.py
+└── test.py
+```
 ## 2.3 执行
 ```sh
 python daily_job_notifier.py  
