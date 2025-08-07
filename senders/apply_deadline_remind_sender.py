@@ -3,7 +3,7 @@ import os
 import csv
 from datetime import datetime, timedelta
 from fetchers.hot_recommend_fetcher import fetch_jobs_with_hot_recommend
-from tools import send_with_retry
+from senders.tools import send_with_retry
 
 def get_jobs_ending_in_24h(path='jobs_data'):
     jobs = []
@@ -29,10 +29,18 @@ def get_jobs_ending_in_24h(path='jobs_data'):
                         continue
                     if now < end_time <= next_24h:
                         jobs.append(row)
-    return jobs
+    seen = set()
+    unique_jobs = []
+    for job in jobs:
+        key = (job.get("公司"), job.get("批次"))
+        if key not in seen:
+            seen.add(key)
+            unique_jobs.append(job)
+    return unique_jobs
 
 def deadline_remind_sender(path, webhook_url):
     nums = 1
+    counts = 1
     hot_recommend_jobs = fetch_jobs_with_hot_recommend()
     hot_job_content = ""
     for job in hot_recommend_jobs:
@@ -45,9 +53,10 @@ def deadline_remind_sender(path, webhook_url):
         content += hot_job_content
     else:
         content = "**未来24小时内截止投递的公司如下：**\n\n"
+
         for job in jobs:
-            content += f"- [{nums} : {job['公司']} - {job['批次']}] \n    更新时间：{job['更新时间']} \n    网申开始时间：{job['网申开始时间']} \n    网申结束时间：{job['网申结束时间']}\n"
-            nums += 1
+            content += f"- [{counts} : {job['公司']} - {job['批次']}] \n    更新时间：{job['更新时间']} \n    网申开始时间：{job['网申开始时间']} \n    网申结束时间：{job['网申结束时间']}\n"
+            counts += 1
         content += f"\n\n**下面推送热门推荐公司**\n\n{hot_job_content}"
 
     data = {

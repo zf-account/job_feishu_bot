@@ -18,6 +18,16 @@ logging.basicConfig(
     ]
 )
 
+def deduplicate_jobs(jobs):
+    seen = set()
+    unique_jobs = []
+    for job in jobs:
+        key = (job.get("公司"), job.get("批次"))
+        if key not in seen:
+            seen.add(key)
+            unique_jobs.append(job)
+    return unique_jobs
+
 if __name__ == "__main__":
     logging.info("Start execution daily_job_notifier.py")
     logging.info(f"Current working directory: {os.getcwd()}")
@@ -26,7 +36,8 @@ if __name__ == "__main__":
     
     try:
         jobs = fetch_jobs_within_24_hours()
-        logging.info(f"Get {len(jobs)} jobs")
+        jobs = deduplicate_jobs(jobs)  # 添加去重
+        logging.info(f"Get {len(jobs)} jobs after deduplication")
         
         path = "/home/aitotra/vscodeworkspace/job_feishu_bot/jobs_data"
         logging.info(f"Data path: {path}")
