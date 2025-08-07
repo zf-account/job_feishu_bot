@@ -6,3 +6,4 @@ jobs_data
 senders/__pycache__
 test.py
 daily_run.sh
+cron.log

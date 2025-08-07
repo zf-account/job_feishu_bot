@@ -33,6 +33,7 @@ def get_jobs_ending_in_24h(path='jobs_data'):
 def deadline_remind_sender(path, webhook_url):
     nums = 1
     hot_recommend_jobs = fetch_jobs_with_hot_recommend()
+    hot_job_content = ""
     for job in hot_recommend_jobs:
         hot_job_content += f"- [{nums} : {job['公司']} - {job['批次']}] \n    更新时间：{job['更新时间']} \n    网申开始时间：{job['网申开始时间']} \n    网申结束时间：{job['网申结束时间']}\n"
         nums += 1
