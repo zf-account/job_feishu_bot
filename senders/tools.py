@@ -1,4 +1,5 @@
 import requests
+import logging
 
 def send_with_retry(request_func, max_retries=3, base_delay=3):
     for attempt in range(max_retries):

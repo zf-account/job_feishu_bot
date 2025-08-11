@@ -37,7 +37,7 @@ def fetch_jobs_with_hot_recommend():
     recruit_list = result.get('data').get('datas')
     now = int(time.time())
     for job in recruit_list:
-        wangshenEndDate = int(job.get("wangshenEndDate", 0)) // 1000
+        wangshenEndDate = int(job.get("wangshenEndDate") or 0) // 1000
         if wangshenEndDate >= now:
             jobs.append({
                 "公司": job.get("name"),
