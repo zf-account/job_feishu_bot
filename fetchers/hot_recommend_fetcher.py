@@ -42,9 +42,9 @@ def fetch_jobs_with_hot_recommend():
             jobs.append({
                 "公司": job.get("name"),
                 "批次": job.get("batchName"),
-                "更新时间": datetime.fromtimestamp(int(job.get("wangshenUpdateTime", 0)) // 1000).strftime("%Y-%m-%d %H:%M"),
-                "网申开始时间": datetime.fromtimestamp(job.get("wangshenBeginDate") / 1000).strftime("%Y-%m-%d %H:%M"),
-                "网申结束时间": datetime.fromtimestamp(job.get("wangshenEndDate") / 1000).strftime("%Y-%m-%d %H:%M")
+                "更新时间": datetime.fromtimestamp(int(job.get("wangshenUpdateTime") or 0) // 1000).strftime("%Y-%m-%d %H:%M"),
+                "网申开始时间": datetime.fromtimestamp((job.get("wangshenBeginDate") or 0) / 1000).strftime("%Y-%m-%d %H:%M"),
+                "网申结束时间": datetime.fromtimestamp((job.get("wangshenEndDate") or 0) / 1000).strftime("%Y-%m-%d %H:%M")
             })
 
     if jobs:

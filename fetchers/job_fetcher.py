@@ -34,14 +34,15 @@ def fetch_jobs_within_24_hours():
     result = response.json()
     recruit_list = result.get('data').get('datas')
     for job in recruit_list:
-        update_time = int(job.get("wangshenUpdateTime", 0)) // 1000
+        update_time = int(job.get("wangshenUpdateTime") or 0) // 1000
         if update_time >= yesterday:
             jobs.append({
                 "公司": job.get("name"),
                 "批次": job.get("batchName"),
                 "更新时间": datetime.fromtimestamp(update_time).strftime("%Y-%m-%d %H:%M"),
-                "网申开始时间": datetime.fromtimestamp(job.get("wangshenBeginDate") / 1000).strftime("%Y-%m-%d %H:%M"),
-                "网申结束时间": datetime.fromtimestamp(job.get("wangshenEndDate") / 1000).strftime("%Y-%m-%d %H:%M")
+                "网申开始时间": datetime.fromtimestamp((job.get("wangshenBeginDate") or 0) / 1000).strftime("%Y-%m-%d %H:%M") if job.get("wangshenBeginDate") else "未知",
+                "网申结束时间": datetime.fromtimestamp((job.get("wangshenEndDate") or 0)/ 1000).strftime("%Y-%m-%d %H:%M") if job.get("wangshenEndDate") else "未知"
+
             })
 
     if jobs:
